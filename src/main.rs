@@ -18,7 +18,13 @@ fn main() {
             .expect("Failed to read line");
     
         // Convert the String the program reads as input into a real number type
-        let guess: u32 = guess.trim().parse().expect("Please type a number!");
+        let guess: u32 = match guess.trim().parse() {
+            Ok(number) => number,
+            // The underscore is a catchall value
+            // In this example, we’re saying we want to match all Err values
+            // No matter what information they have inside them
+            Err(_) => continue,
+        };
     
         println!("You guessed: {guess}");
     
